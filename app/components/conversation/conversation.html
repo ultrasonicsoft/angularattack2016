@@ -5,8 +5,22 @@
     <li class="divider"></li>
     <li><a (click)="deleteConversation()">Delete Conversation</a></li>
     <li class="divider"></li>
-    <li><a>Settings</a></li>
+    <li><a (click)="openSettings()">Settings</a></li>
 </ul>
+
+
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Settings</h4>
+        <p>Current time interval for encrypting message (in seconds): {{encryptionTimeInterval}}</p>
+        <p>Set time interval for encrypting message (in seconds)</p>
+        <p class="range-field">
+            <input type="range" id="test5" min="0" max="100" [attr.value]="encryptionTimeInterval" #interval (change)="encryptionIntervalChanged(interval)" />
+        </p>
+    </div>
+</div>
+
 
 <ul>
     <li *ngFor="let message of activeUser.messages;" class="bold">

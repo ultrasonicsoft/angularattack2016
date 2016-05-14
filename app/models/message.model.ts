@@ -13,8 +13,9 @@ export class Message {
     encryptedText: string;
 
     enableEncryption = true;
+    encryptionInterval = 5;
 
-    constructor(id: number, isRead: boolean, text: string, sender: User, isOwn: boolean, enableEncryption:boolean) {
+    constructor(id: number, isRead: boolean, text: string, sender: User, isOwn: boolean, enableEncryption:boolean, encryptionInterval:number) {
         this.id = id;
         this.isRead = isRead;
         this.text = text;
@@ -22,9 +23,10 @@ export class Message {
         this.messageReceived = new Date();
         this.isOwn = isOwn;
         this.enableEncryption = enableEncryption;
+        this.encryptionInterval = encryptionInterval;
         
         if (this.enableEncryption) {
-            setTimeout(() => { this.encryptMessage(); }, 5000);
+            setTimeout(() => { this.encryptMessage(); }, this.encryptionInterval * 1000);
         }
     }
 
@@ -41,7 +43,7 @@ export class Message {
         this.text = sjcl.decrypt("password", this.encryptedData);
 
         if (this.enableEncryption) {
-            setTimeout(() => { this.encryptMessage(); }, 5000);
+            setTimeout(() => { this.encryptMessage(); }, this.encryptionInterval * 1000);
         }
     }
     

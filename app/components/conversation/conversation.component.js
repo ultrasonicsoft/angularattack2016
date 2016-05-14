@@ -15,6 +15,7 @@ var user_model_1 = require('../../models/user.model');
 var Conversation = (function () {
     function Conversation(userService) {
         this.userService = userService;
+        this.encryptionTimeInterval = 5;
     }
     Conversation.prototype.ngOnInit = function () {
         this.activeUser.messages = new Array();
@@ -28,6 +29,9 @@ var Conversation = (function () {
             gutter: 0,
             belowOrigin: false,
             alignment: 'left' // Displays dropdown with edge aligned to the left of button
+        });
+        jQuery(document).ready(function () {
+            jQuery('.modal-trigger').leanModal();
         });
     };
     Conversation.prototype.toggleEncryption = function () {
@@ -43,9 +47,9 @@ var Conversation = (function () {
         if (!this.activeUser.messages) {
             this.activeUser.messages = new Array();
         }
-        var newMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true, this.activeUser.enableEncryption);
+        var newMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true, this.activeUser.enableEncryption, this.encryptionTimeInterval);
         this.activeUser.messages.push(newMessage);
-        var echoMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false, this.activeUser.enableEncryption);
+        var echoMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false, this.activeUser.enableEncryption, this.encryptionTimeInterval);
         this.activeUser.messages.push(echoMessage);
     };
     Conversation.prototype.decryptMessag = function (message) {
@@ -53,6 +57,13 @@ var Conversation = (function () {
     };
     Conversation.prototype.deleteConversation = function () {
         this.activeUser.deleteConversation();
+    };
+    Conversation.prototype.openSettings = function () {
+        jQuery('#modal1').openModal();
+    };
+    Conversation.prototype.encryptionIntervalChanged = function (interval) {
+        console.log('encryptionTimeInterval: ' + interval.value);
+        this.encryptionTimeInterval = interval.value;
     };
     __decorate([
         core_1.Input('active-user'), 
