@@ -1,20 +1,18 @@
 <!-- Dropdown Trigger -->
 <!-- Dropdown Structure -->
-<ul id='dropdown1' class='dropdown-content' style="margin-top:40px;">
+<ul id='dropdown1' class='dropdown-content'>
     <li><a (click)="toggleEncryption()">{{activeUser.enableEncryption? 'Disable Encryption':'Enable Encryption'}}</a></li>
     <li class="divider"></li>
     <li><a (click)="deleteConversation()">Delete Conversation</a></li>
     <li class="divider"></li>
-    <li><a (click)="openSettings()">Settings</a></li>
+    <li><a (click)="openSettings()">Chat Settings</a></li>
 </ul>
-
-
 
 <div id="modal1" class="modal">
     <div class="modal-content">
-        <h4>Settings</h4>
-        <p>Current time interval for encrypting message (in seconds): {{encryptionTimeInterval}}</p>
-        <p>Set time interval for encrypting message (in seconds)</p>
+        <h4>Message Encryption Interval Settings</h4>
+        <p>Current (in seconds): <strong>{{encryptionTimeInterval}}</strong></p>
+        <p>Set new(in seconds):</p>
         <p class="range-field">
             <input type="range" id="test5" min="0" max="100" [attr.value]="encryptionTimeInterval" #interval (change)="encryptionIntervalChanged(interval)" />
         </p>
