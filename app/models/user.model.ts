@@ -19,4 +19,9 @@ export class User {
             message.encryptMessage();
         })
     }
+    
+    deleteConversation(){
+        this.messages = new Array<Message>();
+        this.enableEncryption = true;
+    }
 }

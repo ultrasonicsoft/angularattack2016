@@ -57,4 +57,8 @@ export class Conversation {
     decryptMessag(message: Message) {
         message.decryptMessage();
     }
+    
+    deleteConversation(){
+        this.activeUser.deleteConversation();
+    }
 }

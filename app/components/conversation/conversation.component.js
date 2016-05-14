@@ -51,6 +51,9 @@ var Conversation = (function () {
     Conversation.prototype.decryptMessag = function (message) {
         message.decryptMessage();
     };
+    Conversation.prototype.deleteConversation = function () {
+        this.activeUser.deleteConversation();
+    };
     __decorate([
         core_1.Input('active-user'), 
         __metadata('design:type', user_model_1.User)

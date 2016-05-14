@@ -15,6 +15,10 @@ var User = (function () {
             message.encryptMessage();
         });
     };
+    User.prototype.deleteConversation = function () {
+        this.messages = new Array();
+        this.enableEncryption = true;
+    };
     return User;
 }());
 exports.User = User;
