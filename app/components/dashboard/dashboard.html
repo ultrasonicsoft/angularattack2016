@@ -12,7 +12,7 @@
         </li>-->
 
         <li *ngFor="let user of allUsers;" class="bold">
-            <a class="waves-effect waves-teal"> {{user.name}}</a>
+            <a class="waves-effect waves-teal" (click)="setActiveUser(user)"> {{user.name}}</a>
         </li>
     </ul>
 </header>

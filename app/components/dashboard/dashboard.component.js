@@ -17,12 +17,16 @@ var AppComponent = (function () {
     }
     AppComponent.prototype.ngOnInit = function () {
         this.allUsers = this.userService.getAllUsers();
+        this.activeUser = this.allUsers[0];
         console.log(this.allUsers);
     };
+    AppComponent.prototype.setActiveUser = function (sender) {
+        this.activeUser = sender;
+    };
     AppComponent.prototype.sendMessage = function () {
-        this.conversation.newMessageAlert(this.messageText);
+        console.log(this.activeUser.name);
+        this.conversation.newMessageAlert(this.messageText, this.activeUser);
         this.messageText = '';
-        // alert(this.messageText);
     };
     __decorate([
         core_1.ViewChild(conversation_component_1.Conversation), 

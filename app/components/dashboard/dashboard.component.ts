@@ -11,21 +11,28 @@ import { Conversation } from '../conversation/conversation.component';
 export class AppComponent {
     
     private allUsers:Array<User>;
-    messageText:string;
+    private messageText:string;
     @ViewChild(Conversation) conversation:Conversation;
+    
+    private activeUser:User;
     
     constructor(private userService: UserService){
     }
     
     ngOnInit(){
         this.allUsers = this.userService.getAllUsers();
+        this.activeUser = this.allUsers[0];
         console.log(this.allUsers);
     }
     
+    setActiveUser(sender:User){
+        this.activeUser = sender;    
+    }
+    
     sendMessage(){
-        this.conversation.newMessageAlert(this.messageText);
+        console.log(this.activeUser.name);
+        this.conversation.newMessageAlert(this.messageText, this.activeUser);
         this.messageText = '';
-        // alert(this.messageText);
         
     }
  }

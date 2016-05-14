@@ -18,8 +18,8 @@ var Conversation = (function () {
     Conversation.prototype.ngOnInit = function () {
         this.messages = new Array();
     };
-    Conversation.prototype.newMessageAlert = function (newMessageText) {
-        var newMessage = new message_model_1.Message(this.messages.length + 1, false, newMessageText);
+    Conversation.prototype.newMessageAlert = function (newMessageText, sender) {
+        var newMessage = new message_model_1.Message(this.messages.length + 1, false, newMessageText, sender);
         this.messages.push(newMessage);
     };
     Conversation = __decorate([
