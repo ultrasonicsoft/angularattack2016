@@ -11,10 +11,9 @@
                 <object id="front-page-logo" type="image/svg+xml" data="res/materialize.svg">Your browser does not support SVG</object></a>
         </li>-->
 
-        <li class="bold"><a href="about.html" class="waves-effect waves-teal">User 1</a></li>
-        <li class="bold"><a href="getting-started.html" class="waves-effect waves-teal">User 2</a></li>
-        <li class="bold"><a href="http://materializecss.com/mobile.html" class="waves-effect waves-teal">User 3</a></li>
-        <li class="bold active"><a href="showcase.html" class="waves-effect waves-teal">User 4</a></li>
+        <li *ngFor="let user of allUsers;" class="bold">
+            <a class="waves-effect waves-teal"> {{user.name}}</a>
+        </li>
     </ul>
 </header>
 <main>
