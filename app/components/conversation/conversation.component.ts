@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Message } from '../../models/message.model';
 import { User } from '../../models/user.model';
@@ -10,22 +10,25 @@ import { User } from '../../models/user.model';
 })
 export class Conversation {
 
-    private messages: Array<Message>;
-
+     @Input('active-user') activeUser: User;
+     
     constructor(private userService: UserService) {
     }
 
     ngOnInit() {
-        this.messages = new Array<Message>();
+        this.activeUser.messages = new Array<Message>();
     }
 
     newMessageAlert(newMessageText: string, sender: User) {
         
-        let newMessage = new Message(this.messages.length + 1, false, newMessageText, sender, true);
-        this.messages.push(newMessage);
+        if(!this.activeUser.messages){
+            this.activeUser.messages = new Array<Message>();
+        }
+        let newMessage = new Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true);
+        this.activeUser.messages.push(newMessage);
 
-        let echoMessage = new Message(this.messages.length + 1, false, newMessageText, sender, false);
-        this.messages.push(echoMessage);
+        let echoMessage = new Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false);
+        this.activeUser.messages.push(echoMessage);
     }
     
     decryptMessag(message:Message){

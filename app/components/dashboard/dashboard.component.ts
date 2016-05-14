@@ -26,7 +26,7 @@ export class AppComponent {
     }
     
     setActiveUser(sender:User){
-        this.activeUser = sender;    
+        this.activeUser = sender;
     }
     
     sendMessage(){

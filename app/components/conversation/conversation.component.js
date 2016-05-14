@@ -11,22 +11,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var user_service_1 = require('../../services/user.service');
 var message_model_1 = require('../../models/message.model');
+var user_model_1 = require('../../models/user.model');
 var Conversation = (function () {
     function Conversation(userService) {
         this.userService = userService;
     }
     Conversation.prototype.ngOnInit = function () {
-        this.messages = new Array();
+        this.activeUser.messages = new Array();
     };
     Conversation.prototype.newMessageAlert = function (newMessageText, sender) {
-        var newMessage = new message_model_1.Message(this.messages.length + 1, false, newMessageText, sender, true);
-        this.messages.push(newMessage);
-        var echoMessage = new message_model_1.Message(this.messages.length + 1, false, newMessageText, sender, false);
-        this.messages.push(echoMessage);
+        if (!this.activeUser.messages) {
+            this.activeUser.messages = new Array();
+        }
+        var newMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true);
+        this.activeUser.messages.push(newMessage);
+        var echoMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false);
+        this.activeUser.messages.push(echoMessage);
     };
     Conversation.prototype.decryptMessag = function (message) {
         message.decryptMessage();
     };
+    __decorate([
+        core_1.Input('active-user'), 
+        __metadata('design:type', user_model_1.User)
+    ], Conversation.prototype, "activeUser", void 0);
     Conversation = __decorate([
         core_1.Component({
             selector: 'conversation',

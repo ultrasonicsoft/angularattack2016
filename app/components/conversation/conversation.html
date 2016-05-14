@@ -1,5 +1,5 @@
 <ul>
-    <li *ngFor="let message of messages;" class="bold">
+    <li *ngFor="let message of activeUser.messages;" class="bold">
         <div *ngIf="message.isOwn" class="card-panel teal white-text own-message" (click)="decryptMessag(message)">
             <strong class="waves-effect waves-teal"> {{message.text}} </strong>
             <span style="font-size:10">{{message.messageReceived | date:'shortTime'}}</span>
