@@ -9,7 +9,8 @@ export class Message {
     sender: User;
     messageReceived: Date;
     isOwn: boolean;
-    encryptedText:any;
+    encryptedData:any;
+    encryptedText:string;
 
     constructor(id: number, isRead: boolean, text: string, sender: User, isOwn: boolean) {
         this.id = id;
@@ -24,15 +25,15 @@ export class Message {
     }
 
     encryptMessage() {
-        this.encryptedText = sjcl.encrypt("password", this.text);
-        var encryptedJson = JSON.parse(this.encryptedText);
+        this.encryptedData = sjcl.encrypt("password", this.text);
+        var encryptedJson = JSON.parse(this.encryptedData);
         console.log('encrypted message: ' + encryptedJson.iv);
         this.text = encryptedJson.iv;
     }
     
     decryptMessage(){
         console.log('decrypt called for message: ', this.text);
-        this.text = sjcl.decrypt("password", this.encryptedText);
+        this.text = sjcl.decrypt("password", this.encryptedData);
         
         setTimeout(() => { this.encryptMessage(); }, 5000);
         

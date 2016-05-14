@@ -11,15 +11,15 @@ var Message = (function () {
         setTimeout(function () { _this.encryptMessage(); }, 5000);
     }
     Message.prototype.encryptMessage = function () {
-        this.encryptedText = sjcl.encrypt("password", this.text);
-        var encryptedJson = JSON.parse(this.encryptedText);
+        this.encryptedData = sjcl.encrypt("password", this.text);
+        var encryptedJson = JSON.parse(this.encryptedData);
         console.log('encrypted message: ' + encryptedJson.iv);
         this.text = encryptedJson.iv;
     };
     Message.prototype.decryptMessage = function () {
         var _this = this;
         console.log('decrypt called for message: ', this.text);
-        this.text = sjcl.decrypt("password", this.encryptedText);
+        this.text = sjcl.decrypt("password", this.encryptedData);
         setTimeout(function () { _this.encryptMessage(); }, 5000);
     };
     return Message;
