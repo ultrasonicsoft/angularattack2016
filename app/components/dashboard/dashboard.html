@@ -19,8 +19,14 @@
 <main>
     <div class="container">
         <div class="row" style="margin-left:5%;">
+            <conversation></conversation>
+        </div>
+        <div class="row" style="margin-left:5%;">
             <div class="input-field col s10 m9" style="position:fixed; bottom:0;">
-                <input placeholder="Enter your chat message" id="first_name" type="text" class="validate">
+                <input placeholder="Enter your chat message" (keyup.enter)="sendMessage()" [(ngModel)]="messageText" type="text" class="validate">
+            </div>
+            <div>
+
             </div>
             <div class="offset-s10 offset-m9 col s1 m1" style="position:fixed; bottom:0;">
                 <a><i class="material-icons">send</i></a>

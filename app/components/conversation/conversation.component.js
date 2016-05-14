@@ -10,33 +10,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var user_service_1 = require('../../services/user.service');
-var conversation_component_1 = require('../conversation/conversation.component');
-var AppComponent = (function () {
-    function AppComponent(userService) {
+var message_model_1 = require('../../models/message.model');
+var Conversation = (function () {
+    function Conversation(userService) {
         this.userService = userService;
     }
-    AppComponent.prototype.ngOnInit = function () {
-        this.allUsers = this.userService.getAllUsers();
-        console.log(this.allUsers);
+    Conversation.prototype.ngOnInit = function () {
+        this.messages = new Array();
     };
-    AppComponent.prototype.sendMessage = function () {
-        this.conversation.newMessageAlert(this.messageText);
-        this.messageText = '';
-        // alert(this.messageText);
+    Conversation.prototype.newMessageAlert = function (newMessageText) {
+        var newMessage = new message_model_1.Message(this.messages.length + 1, false, newMessageText);
+        this.messages.push(newMessage);
     };
-    __decorate([
-        core_1.ViewChild(conversation_component_1.Conversation), 
-        __metadata('design:type', conversation_component_1.Conversation)
-    ], AppComponent.prototype, "conversation", void 0);
-    AppComponent = __decorate([
+    Conversation = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            templateUrl: 'app/components/dashboard/dashboard.html',
-            directives: [conversation_component_1.Conversation]
+            selector: 'conversation',
+            templateUrl: 'app/components/conversation/conversation.html'
         }), 
         __metadata('design:paramtypes', [user_service_1.UserService])
-    ], AppComponent);
-    return AppComponent;
+    ], Conversation);
+    return Conversation;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=dashboard.component.js.map
+exports.Conversation = Conversation;
+//# sourceMappingURL=conversation.component.js.map

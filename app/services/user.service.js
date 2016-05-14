@@ -9,11 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var user_model_ts_1 = require('../models/user.model.ts');
 var UserService = (function () {
     function UserService() {
+        this.allUsers = new Array();
+        var user = new user_model_ts_1.User();
+        for (var index = 0; index < 10; index++) {
+            user = new user_model_ts_1.User();
+            user.id = index + 1;
+            user.name = "User " + user.id;
+            this.allUsers.push(user);
+        }
     }
-    UserService.prototype.setCurrentUser = function (newUser) {
-        this.currentUser.next(newUser);
+    UserService.prototype.getAllUsers = function () {
+        return this.allUsers;
     };
     UserService = __decorate([
         core_1.Injectable(), 
