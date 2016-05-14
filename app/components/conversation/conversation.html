@@ -1,5 +1,12 @@
 <ul>
     <li *ngFor="let message of messages;" class="bold">
-        <a class="waves-effect waves-teal"> {{message.text}}</a>
+        <div *ngIf="message.isOwn" class="card-panel teal white-text own-message">
+            <strong class="waves-effect waves-teal"> {{message.text}} </strong>
+            <span style="font-size:10">{{message.messageReceived | date:'shortTime'}}</span>
+        </div>
+        <div *ngIf="!message.isOwn" class="card-panel teal white-text" style="min-width: 20%; max-width: 30%;">
+            <strong class="waves-effect waves-teal"> {{message.text}} </strong>
+            <span style="font-size:10">{{message.messageReceived | date:'shortTime'}}</span>
+        </div>
     </li>
 </ul>

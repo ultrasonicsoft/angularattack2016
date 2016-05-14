@@ -18,7 +18,10 @@ export class Conversation {
     }
 
     newMessageAlert(newMessageText: string, sender: User) {
-        let newMessage = new Message(this.messages.length + 1, false, newMessageText, sender);
+        let newMessage = new Message(this.messages.length + 1, false, newMessageText, sender,true);
         this.messages.push(newMessage);
+        
+        let echoMessage = new Message(this.messages.length + 1, false, newMessageText, sender,false);
+        this.messages.push(echoMessage);
     }
 }

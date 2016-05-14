@@ -19,8 +19,10 @@ var Conversation = (function () {
         this.messages = new Array();
     };
     Conversation.prototype.newMessageAlert = function (newMessageText, sender) {
-        var newMessage = new message_model_1.Message(this.messages.length + 1, false, newMessageText, sender);
+        var newMessage = new message_model_1.Message(this.messages.length + 1, false, newMessageText, sender, true);
         this.messages.push(newMessage);
+        var echoMessage = new message_model_1.Message(this.messages.length + 1, false, newMessageText, sender, false);
+        this.messages.push(echoMessage);
     };
     Conversation = __decorate([
         core_1.Component({
