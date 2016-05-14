@@ -1,6 +1,6 @@
 import { User } from './user.model';
 
-declare var sjcl:any;
+declare var sjcl: any;
 
 export class Message {
     id: number;
@@ -9,19 +9,23 @@ export class Message {
     sender: User;
     messageReceived: Date;
     isOwn: boolean;
-    encryptedData:any;
-    encryptedText:string;
+    encryptedData: any;
+    encryptedText: string;
 
-    constructor(id: number, isRead: boolean, text: string, sender: User, isOwn: boolean) {
+    enableEncryption = true;
+
+    constructor(id: number, isRead: boolean, text: string, sender: User, isOwn: boolean, enableEncryption:boolean) {
         this.id = id;
         this.isRead = isRead;
         this.text = text;
         this.sender = sender;
         this.messageReceived = new Date();
         this.isOwn = isOwn;
-
-        setTimeout(() => { this.encryptMessage(); }, 5000);
-
+        this.enableEncryption = enableEncryption;
+        
+        if (this.enableEncryption) {
+            setTimeout(() => { this.encryptMessage(); }, 5000);
+        }
     }
 
     encryptMessage() {
@@ -30,12 +34,21 @@ export class Message {
         console.log('encrypted message: ' + encryptedJson.iv);
         this.text = encryptedJson.iv;
     }
-    
-    decryptMessage(){
+
+    decryptMessage() {
         console.log('decrypt called for message: ', this.text);
         this.text = sjcl.decrypt("password", this.encryptedData);
-        
-        setTimeout(() => { this.encryptMessage(); }, 5000);
-        
+
+        if (this.enableEncryption) {
+            setTimeout(() => { this.encryptMessage(); }, 5000);
+        }
+    }
+    
+    stopEncryption(){
+        this.enableEncryption = false;
+    }
+    
+    startEncryption(){
+        this.enableEncryption = true;
     }
 }

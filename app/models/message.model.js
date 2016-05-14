@@ -1,14 +1,18 @@
 "use strict";
 var Message = (function () {
-    function Message(id, isRead, text, sender, isOwn) {
+    function Message(id, isRead, text, sender, isOwn, enableEncryption) {
         var _this = this;
+        this.enableEncryption = true;
         this.id = id;
         this.isRead = isRead;
         this.text = text;
         this.sender = sender;
         this.messageReceived = new Date();
         this.isOwn = isOwn;
-        setTimeout(function () { _this.encryptMessage(); }, 5000);
+        this.enableEncryption = enableEncryption;
+        if (this.enableEncryption) {
+            setTimeout(function () { _this.encryptMessage(); }, 5000);
+        }
     }
     Message.prototype.encryptMessage = function () {
         this.encryptedData = sjcl.encrypt("password", this.text);
@@ -20,7 +24,15 @@ var Message = (function () {
         var _this = this;
         console.log('decrypt called for message: ', this.text);
         this.text = sjcl.decrypt("password", this.encryptedData);
-        setTimeout(function () { _this.encryptMessage(); }, 5000);
+        if (this.enableEncryption) {
+            setTimeout(function () { _this.encryptMessage(); }, 5000);
+        }
+    };
+    Message.prototype.stopEncryption = function () {
+        this.enableEncryption = false;
+    };
+    Message.prototype.startEncryption = function () {
+        this.enableEncryption = true;
     };
     return Message;
 }());

@@ -15,17 +15,38 @@ var user_model_1 = require('../../models/user.model');
 var Conversation = (function () {
     function Conversation(userService) {
         this.userService = userService;
+        this.enableEncryption = true;
     }
     Conversation.prototype.ngOnInit = function () {
         this.activeUser.messages = new Array();
+    };
+    Conversation.prototype.ngAfterViewInit = function () {
+        jQuery('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrain_width: false,
+            hover: true,
+            gutter: 0,
+            belowOrigin: false,
+            alignment: 'left' // Displays dropdown with edge aligned to the left of button
+        });
+    };
+    Conversation.prototype.toggleEncryption = function () {
+        this.enableEncryption = !this.enableEncryption;
+        if (this.enableEncryption) {
+            this.activeUser.encryptAllMessage();
+        }
+        else {
+            this.activeUser.decryptAllMessage();
+        }
     };
     Conversation.prototype.newMessageAlert = function (newMessageText, sender) {
         if (!this.activeUser.messages) {
             this.activeUser.messages = new Array();
         }
-        var newMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true);
+        var newMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true, this.enableEncryption);
         this.activeUser.messages.push(newMessage);
-        var echoMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false);
+        var echoMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false, this.enableEncryption);
         this.activeUser.messages.push(echoMessage);
     };
     Conversation.prototype.decryptMessag = function (message) {

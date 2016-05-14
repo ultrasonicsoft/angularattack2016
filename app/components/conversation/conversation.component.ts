@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { Message } from '../../models/message.model';
 import { User } from '../../models/user.model';
 
+declare var jQuery: any;
 
 @Component({
     selector: 'conversation',
@@ -10,8 +11,9 @@ import { User } from '../../models/user.model';
 })
 export class Conversation {
 
-     @Input('active-user') activeUser: User;
-     
+    @Input('active-user') activeUser: User;
+    enableEncryption = true;
+
     constructor(private userService: UserService) {
     }
 
@@ -19,19 +21,41 @@ export class Conversation {
         this.activeUser.messages = new Array<Message>();
     }
 
+    ngAfterViewInit() {
+        jQuery('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrain_width: false, // Does not change width of dropdown to that of the activator
+            hover: true, // Activate on hover
+            gutter: 0, // Spacing from edge
+            belowOrigin: false, // Displays dropdown below the button
+            alignment: 'left' // Displays dropdown with edge aligned to the left of button
+        }
+        );
+    }
+
+    toggleEncryption() {
+        this.enableEncryption = !this.enableEncryption;
+        if (this.enableEncryption) {
+            this.activeUser.encryptAllMessage();
+        }
+        else {
+            this.activeUser.decryptAllMessage();
+        }
+    }
     newMessageAlert(newMessageText: string, sender: User) {
-        
-        if(!this.activeUser.messages){
+
+        if (!this.activeUser.messages) {
             this.activeUser.messages = new Array<Message>();
         }
-        let newMessage = new Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true);
+        let newMessage = new Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true, this.enableEncryption);
         this.activeUser.messages.push(newMessage);
 
-        let echoMessage = new Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false);
+        let echoMessage = new Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false, this.enableEncryption);
         this.activeUser.messages.push(echoMessage);
     }
-    
-    decryptMessag(message:Message){
+
+    decryptMessag(message: Message) {
         message.decryptMessage();
     }
 }
