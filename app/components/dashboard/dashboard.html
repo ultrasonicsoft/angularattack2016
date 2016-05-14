@@ -1,25 +1,31 @@
-<nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Safe Chat - Chat safely in public place</a>
-        <ul class="right hide-on-med-and-down">
-            <li><a href="#">Navbar Link</a></li>
-        </ul>
+<header>
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="container" style="margin-left:20%;">
+            <div class="nav-wrapper"><a class="page-title">Current Chat Window</a></div>
+        </div>
+    </nav>
+    <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+    <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
+        <!--<li class="logo">
+            <a id="logo-container" href="http://materializecss.com/" class="brand-logo">
+                <object id="front-page-logo" type="image/svg+xml" data="res/materialize.svg">Your browser does not support SVG</object></a>
+        </li>-->
 
-        <ul id="nav-mobile" class="side-nav">
-            <li><a href="#">Navbar Link</a></li>
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-</nav>
-<div class="section no-pad-bot" id="index-banner">
+        <li class="bold"><a href="about.html" class="waves-effect waves-teal">User 1</a></li>
+        <li class="bold"><a href="getting-started.html" class="waves-effect waves-teal">User 2</a></li>
+        <li class="bold"><a href="http://materializecss.com/mobile.html" class="waves-effect waves-teal">User 3</a></li>
+        <li class="bold active"><a href="showcase.html" class="waves-effect waves-teal">User 4</a></li>
+    </ul>
+</header>
+<main>
     <div class="container">
-        <!--<br><br>
-        <h1 class="header center orange-text">Chat in public with secure way</h1>
-        <div class="row center">
-            <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+        <div class="row" style="margin-left:5%;">
+            <div class="input-field col s10 m9" style="position:fixed; bottom:0;">
+                <input placeholder="Enter your chat message" id="first_name" type="text" class="validate">
+            </div>
+            <div class="offset-s10 offset-m9 col s1 m1" style="position:fixed; bottom:0;">
+                <a><i class="material-icons">send</i></a>
+            </div>
         </div>
-        <div class="row center">
-            <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light orange">Get Started</a>
-        </div>
-        <br><br>-->
     </div>
-</div>
+</main>
