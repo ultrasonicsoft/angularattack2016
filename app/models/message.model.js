@@ -15,9 +15,9 @@ var Message = (function () {
         }
     }
     Message.prototype.encryptMessage = function () {
+        console.log('encrypt called for: ' + this.text);
         this.encryptedData = sjcl.encrypt("password", this.text);
         var encryptedJson = JSON.parse(this.encryptedData);
-        console.log('encrypted message: ' + encryptedJson.iv);
         this.text = encryptedJson.iv;
     };
     Message.prototype.decryptMessage = function () {

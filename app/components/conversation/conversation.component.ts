@@ -12,7 +12,6 @@ declare var jQuery: any;
 export class Conversation {
 
     @Input('active-user') activeUser: User;
-    enableEncryption = true;
 
     constructor(private userService: UserService) {
     }
@@ -35,8 +34,8 @@ export class Conversation {
     }
 
     toggleEncryption() {
-        this.enableEncryption = !this.enableEncryption;
-        if (this.enableEncryption) {
+        this.activeUser.enableEncryption = !this.activeUser.enableEncryption;
+        if (this.activeUser.enableEncryption) {
             this.activeUser.encryptAllMessage();
         }
         else {
@@ -48,10 +47,10 @@ export class Conversation {
         if (!this.activeUser.messages) {
             this.activeUser.messages = new Array<Message>();
         }
-        let newMessage = new Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true, this.enableEncryption);
+        let newMessage = new Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true, this.activeUser.enableEncryption);
         this.activeUser.messages.push(newMessage);
 
-        let echoMessage = new Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false, this.enableEncryption);
+        let echoMessage = new Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false, this.activeUser.enableEncryption);
         this.activeUser.messages.push(echoMessage);
     }
 

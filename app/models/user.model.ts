@@ -4,16 +4,17 @@ export class User {
     id: number;
     name: string;
     messages: Array<Message>;
-    
-    decryptAllMessage(){
+    enableEncryption = true;
+
+    decryptAllMessage() {
         this.messages.forEach(message => {
             message.stopEncryption();
             message.decryptMessage();
         });
     }
-    
-    encryptAllMessage(){
-        this.messages.forEach(message =>{
+
+    encryptAllMessage() {
+        this.messages.forEach(message => {
             message.startEncryption();
             message.encryptMessage();
         })

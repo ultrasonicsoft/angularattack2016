@@ -1,7 +1,7 @@
 <!-- Dropdown Trigger -->
 <!-- Dropdown Structure -->
 <ul id='dropdown1' class='dropdown-content' style="margin-top:50px;">
-    <li><a (click)="toggleEncryption()">{{enableEncryption? 'Disable Encryption':'Enable Encryption'}}</a></li>
+    <li><a (click)="toggleEncryption()">{{activeUser.enableEncryption? 'Disable Encryption':'Enable Encryption'}}</a></li>
     <li class="divider"></li>
     <li><a>Settings</a></li>
 </ul>

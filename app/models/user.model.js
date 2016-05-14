@@ -1,6 +1,7 @@
 "use strict";
 var User = (function () {
     function User() {
+        this.enableEncryption = true;
     }
     User.prototype.decryptAllMessage = function () {
         this.messages.forEach(function (message) {

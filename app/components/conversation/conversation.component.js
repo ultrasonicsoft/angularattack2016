@@ -15,7 +15,6 @@ var user_model_1 = require('../../models/user.model');
 var Conversation = (function () {
     function Conversation(userService) {
         this.userService = userService;
-        this.enableEncryption = true;
     }
     Conversation.prototype.ngOnInit = function () {
         this.activeUser.messages = new Array();
@@ -32,8 +31,8 @@ var Conversation = (function () {
         });
     };
     Conversation.prototype.toggleEncryption = function () {
-        this.enableEncryption = !this.enableEncryption;
-        if (this.enableEncryption) {
+        this.activeUser.enableEncryption = !this.activeUser.enableEncryption;
+        if (this.activeUser.enableEncryption) {
             this.activeUser.encryptAllMessage();
         }
         else {
@@ -44,9 +43,9 @@ var Conversation = (function () {
         if (!this.activeUser.messages) {
             this.activeUser.messages = new Array();
         }
-        var newMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true, this.enableEncryption);
+        var newMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true, this.activeUser.enableEncryption);
         this.activeUser.messages.push(newMessage);
-        var echoMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false, this.enableEncryption);
+        var echoMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false, this.activeUser.enableEncryption);
         this.activeUser.messages.push(echoMessage);
     };
     Conversation.prototype.decryptMessag = function (message) {
