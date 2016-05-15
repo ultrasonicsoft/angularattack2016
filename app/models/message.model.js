@@ -42,6 +42,9 @@ var Message = (function () {
         var messageText = this.text + " " + this.messageReceived.toLocaleTimeString();
         this.showAnimation(messageText, this.id);
     };
+    Message.prototype.decrypt = function (encryptedData) {
+        return sjcl.decrypt("password", encryptedData);
+    };
     Message.prototype.stopEncryption = function () {
         this.enableEncryption = false;
     };

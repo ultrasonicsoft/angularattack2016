@@ -66,6 +66,10 @@ export class Message {
         this.showAnimation(messageText, this.id);
        
     }
+    
+    decrypt(encryptedData:any):string{
+        return sjcl.decrypt("password", encryptedData);
+    }
 
     stopEncryption() {
         this.enableEncryption = false;

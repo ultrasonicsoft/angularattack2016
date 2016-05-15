@@ -74,6 +74,20 @@ var Conversation = (function () {
         console.log('encryptionTimeInterval: ' + interval.value);
         this.encryptionTimeInterval = interval.value;
     };
+    Conversation.prototype.showTweetMessageModal = function (message) {
+        this.messageToTweet = message.originalMessageText;
+        jQuery('#tweetModal').openModal();
+    };
+    Conversation.prototype.tweetMessage = function () {
+        if (this.messageToTweet.length > 140) {
+            alert('Tweet should be less than 140 Chars');
+        }
+        else {
+            var twtLink = 'http://twitter.com/home?status=' + encodeURIComponent(this.messageToTweet);
+            window.open(twtLink, '_blank');
+            this.messageToTweet = "";
+        }
+    };
     __decorate([
         core_1.Input('active-user'), 
         __metadata('design:type', user_model_1.User)

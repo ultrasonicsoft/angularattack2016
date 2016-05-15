@@ -13,6 +13,7 @@ export class Conversation {
 
     @Input('active-user') activeUser: User;
     encryptionTimeInterval = 5;
+    messageToTweet: string;
 
     constructor() {
     }
@@ -44,7 +45,7 @@ export class Conversation {
             effect: 'random',        // Animation effect the characters use to appear
             centered: true           // Centers the text relative to its container
         }
-        
+
         // if(txt)
         // txt.textualizer(list, options); // textualize it!
         // txt.textualizer('start'); // start
@@ -86,5 +87,21 @@ export class Conversation {
     encryptionIntervalChanged(interval: any) {
         console.log('encryptionTimeInterval: ' + interval.value);
         this.encryptionTimeInterval = interval.value;
+    }
+
+    showTweetMessageModal(message: Message) {
+        this.messageToTweet = message.originalMessageText;
+        jQuery('#tweetModal').openModal();
+    }
+
+    tweetMessage() {
+        if (this.messageToTweet.length > 140) {
+            alert('Tweet should be less than 140 Chars');
+        }
+        else {
+            var twtLink = 'http://twitter.com/home?status=' + encodeURIComponent(this.messageToTweet);
+            window.open(twtLink, '_blank');
+            this.messageToTweet = "";
+        }
     }
 }

@@ -20,16 +20,41 @@
     </div>
 </div>
 
+<div id="tweetModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Tweet Message</h4>
+        <p>Share this chat message over tweeter</p>
+
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <input id="tweet_message" placeholder="Enter message to tweet" type="text" [(ngModel)]="messageToTweet" class="validate">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a (click)="tweetMessage()" class="modal-action modal-close waves-effect waves-green btn-flat ">Tweet</a>
+    </div>
+</div>
+
 <ul>
     <li *ngFor="let message of activeUser.messages; let i = index" class="bold">
-        <div [attr.id]="'message' + (i+1)" *ngIf="message.isOwn" class="bubble you own-message" (click)="decryptMessag(message)">
+        <!--<div [attr.id]="'message' + (i+1)" *ngIf="message.isOwn" class="bubble you own-message" (click)="decryptMessag(message)">
             <strong class="waves-effect waves-teal"> {{message.text}} </strong>
             <span style="font-size:10">{{message.messageReceived | date:'shortTime'}}</span>
+        </div>-->
+
+        <div *ngIf="message.isOwn" class="bubble you own-message">
+            <div [attr.id]="'message' + (i+1)" (click)="decryptMessag(message)">
+                <strong class="waves-effect waves-teal"> {{message.text}} </strong>
+                <span style="font-size:10">{{message.messageReceived | date:'shortTime'}}</span>
+            </div>
+            <div class="right">
+                <a (click)="showTweetMessageModal(message)"><i class="material-icons">repeat</i></a>
+            </div>
         </div>
 
         <div>
-            <div [attr.id]="'message' + (i+1)" *ngIf="!message.isOwn" class="bubble me recevied-message" 
-                (click)="decryptMessag(message)">
+            <div [attr.id]="'message' + (i+1)" *ngIf="!message.isOwn" class="bubble me recevied-message" (click)="decryptMessag(message)">
                 <strong class="waves-effect waves-teal"> {{message.text}} </strong>
                 <span style="font-size:10">{{message.messageReceived | date:'shortTime'}}</span>
             </div>
