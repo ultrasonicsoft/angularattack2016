@@ -1,6 +1,6 @@
 import {Injectable, bind} from '@angular/core';
-import {Message} from '../models/message.model';
-import {User} from '../models/user.model';
+import {Message} from '../../models/message.model';
+import {User} from '../../models/user.model';
 
 declare var sjcl: any;
 

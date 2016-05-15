@@ -1,6 +1,6 @@
 import {Injectable, bind} from '@angular/core';
-import {User} from '../models/user.model.ts';
-import { IUserService } from './IUserService.service';
+import {User} from '../../../models/user.model.ts';
+import { IUserService } from '../interface/IUserService.service';
 
 @Injectable()
 export class MockUserService implements IUserService{

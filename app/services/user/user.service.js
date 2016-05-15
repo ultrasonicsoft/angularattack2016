@@ -9,17 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var user_model_1 = require('../models/user.model');
 var UserService = (function () {
     function UserService() {
         this.allUsers = new Array();
-        var user = new user_model_1.User();
-        for (var index = 0; index < 10; index++) {
-            user = new user_model_1.User();
-            user.id = index + 1;
-            user.name = "User " + user.id;
-            this.allUsers.push(user);
-        }
+        //TODO: fetch real user from some service
     }
     UserService.prototype.getAllUsers = function () {
         return this.allUsers;

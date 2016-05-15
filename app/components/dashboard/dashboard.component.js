@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var IUserService_service_1 = require('../../services/IUserService.service');
+var IUserService_service_1 = require('../../services/user/interface/IUserService.service');
 var conversation_component_1 = require('../conversation/conversation.component');
 var searchUser_pipe_1 = require('../../pipes/searchUser.pipe');
 var AppComponent = (function () {

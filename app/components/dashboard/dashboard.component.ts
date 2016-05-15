@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import { IUserService } from '../../services/IUserService.service';
+import { IUserService } from '../../services/user/interface/IUserService.service';
 import { User } from '../../models/user.model';
 import { Conversation } from '../conversation/conversation.component';
 import { SearchUserPipe } from '../../pipes/searchUser.pipe';

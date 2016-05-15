@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/user/user.service';
 import { Message } from '../../models/message.model';
 import { User } from '../../models/user.model';
-import { MessageService } from '../../services/message.service';
+import { MessageService } from '../../services/message/message.service';
 
 declare var jQuery: any;
 
