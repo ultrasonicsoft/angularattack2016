@@ -19,10 +19,12 @@
     </nav>
     <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a></div>
     <ul id="nav-mobile" class="side-nav fixed collection" style="transform: translateX(0%);">
-        <!--<li class="logo">
-            <a id="logo-container" href="http://materializecss.com/" class="brand-logo">
-                <object id="front-page-logo" type="image/svg+xml" data="res/materialize.svg">Your browser does not support SVG</object></a>
-        </li>-->
+        <li class="logo light-blue lighten-1" style="height:30%;">
+            <a id="logo-container" class="brand-logo">
+                <img class="circle profile-pic" src="../../../images/Balram.jpg">
+                <h5  class="title white-text profile-info">Balram</h5>
+            </a>
+        </li>
 
         <li *ngFor="let user of allUsers;" class="collection-item avatar">
             <img [src]="user.avatarUrl" alt="user.name" class="circle">

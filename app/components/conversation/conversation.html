@@ -20,10 +20,6 @@
     </div>
 </div>
 
-<!--<div class="bubble me">Hello there!</div>
-<div class="bubble you">Hi. I'm an expandeable chat box with box shadow. How are you? I expand horizontally and vertically, as you can see here.</div>
-<div class="bubble me">Awesome.</div>-->
-
 <ul>
     <li *ngFor="let message of activeUser.messages; let i = index" class="bold">
         <div [attr.id]="'message' + (i+1)" *ngIf="message.isOwn" class="bubble you own-message" (click)="decryptMessag(message)">

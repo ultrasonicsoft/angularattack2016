@@ -58,3 +58,16 @@
     box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
     right: -9px;    
 }
+
+.profile-pic{
+   display:block;
+   margin:auto;
+   width:42px;
+   height:42px; 
+}
+
+.profile-info{
+  text-align: center;
+  margin-top: 10px;
+   font-size: 20pt;
+}
