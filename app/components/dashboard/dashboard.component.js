@@ -21,6 +21,21 @@ var AppComponent = (function () {
         this.activeUser = this.allUsers[0];
         console.log(this.allUsers);
     };
+    AppComponent.prototype.ngAfterViewInit = function () {
+        jQuery('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrain_width: false,
+            hover: true,
+            gutter: 0,
+            belowOrigin: false,
+            alignment: 'left' // Displays dropdown with edge aligned to the left of button
+        });
+        jQuery(document).ready(function () {
+            jQuery('.modal-trigger').leanModal();
+        });
+        jQuery('#splashScreenModal').openModal();
+    };
     AppComponent.prototype.setActiveUser = function (sender) {
         this.activeUser = sender;
     };
