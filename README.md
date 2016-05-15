@@ -11,6 +11,10 @@ So now other people who is trying to sniff or stalk your message will see encryp
 
 When you are at private place or home, you can disable encryption feature and chat normally.
 
+## Demo
+
+![demo1](https://cloud.githubusercontent.com/assets/4145169/15276236/fc23da4e-1aff-11e6-93ce-3e97d951f926.gif)
+
 ## Configure encryption interval
 Default encryption interval is set to five seconds. You can configure this interval as per your choice through chat setting option.
 
@@ -24,7 +28,6 @@ You can search your contact as you type their nam
 Encryption setting can be configured per conversation. So you can have some conversation encrypted and some plain text as per your comfort level.
 
 I have used Stanford Javascript Crypto Library for encryption and decryption.
-
 http://bitwiseshiftleft.github.io/sjcl/
 
 ## Configure Project
