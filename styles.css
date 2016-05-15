@@ -71,3 +71,20 @@
   margin-top: 10px;
    font-size: 20pt;
 }
+
+.message-bar{
+    position:fixed; 
+    bottom:0;
+    width:80%;
+    margin-left:5% !important;
+}
+
+.message-input{
+    width:95% !important;
+}
+
+.message-send-button{
+    vertical-align:bottom;
+    margin-left:10px;
+    cursor:pointer;
+}
