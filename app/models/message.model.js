@@ -1,21 +1,8 @@
 "use strict";
 var Message = (function () {
-    function Message(id, isRead, text, sender, isOwn, enableEncryption, encryptionInterval) {
-        var _this = this;
+    function Message() {
         this.enableEncryption = true;
         this.encryptionInterval = 3;
-        this.id = id;
-        this.isRead = isRead;
-        this.text = text;
-        this.sender = sender;
-        this.messageReceived = new Date();
-        this.isOwn = isOwn;
-        this.enableEncryption = enableEncryption;
-        this.encryptionInterval = encryptionInterval;
-        this.originalMessageText = text;
-        if (this.enableEncryption) {
-            setTimeout(function () { _this.encryptMessage(); }, this.encryptionInterval * 1000);
-        }
     }
     Message.prototype.encryptMessage = function () {
         console.log('encrypt called for: ' + this.text);

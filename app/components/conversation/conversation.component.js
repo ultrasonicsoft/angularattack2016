@@ -9,10 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var message_model_1 = require('../../models/message.model');
 var user_model_1 = require('../../models/user.model');
+var message_service_1 = require('../../services/message.service');
 var Conversation = (function () {
-    function Conversation() {
+    function Conversation(messageService) {
+        this.messageService = messageService;
         this.encryptionTimeInterval = 5;
     }
     Conversation.prototype.ngOnInit = function () {
@@ -31,17 +32,6 @@ var Conversation = (function () {
         jQuery(document).ready(function () {
             jQuery('.modal-trigger').leanModal();
         });
-        var list = ['first blurb', 'second blurb', 'third blurb']; // list of blurbs
-        var txt = jQuery('#message1');
-        var options = {
-            duration: 1000,
-            rearrangeDuration: 1000,
-            effect: 'random',
-            centered: true // Centers the text relative to its container
-        };
-        // if(txt)
-        // txt.textualizer(list, options); // textualize it!
-        // txt.textualizer('start'); // start
     };
     Conversation.prototype.toggleEncryption = function () {
         this.activeUser.enableEncryption = !this.activeUser.enableEncryption;
@@ -53,13 +43,20 @@ var Conversation = (function () {
         }
     };
     Conversation.prototype.newMessageAlert = function (newMessageText, sender) {
+        var _this = this;
         if (!this.activeUser.messages) {
             this.activeUser.messages = new Array();
         }
-        var newMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true, this.activeUser.enableEncryption, this.encryptionTimeInterval);
+        var newMessage = this.messageService.createNewMessage(this.activeUser.messages.length + 1, false, newMessageText, sender, true, this.activeUser.enableEncryption, this.encryptionTimeInterval);
         this.activeUser.messages.push(newMessage);
-        var echoMessage = new message_model_1.Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false, this.activeUser.enableEncryption, this.encryptionTimeInterval);
+        if (this.activeUser.enableEncryption) {
+            setTimeout(function () { newMessage = _this.messageService.encryptMessage(newMessage); }, this.encryptionTimeInterval * 1000);
+        }
+        var echoMessage = this.messageService.createNewMessage(this.activeUser.messages.length + 1, false, newMessageText, sender, false, this.activeUser.enableEncryption, this.encryptionTimeInterval);
         this.activeUser.messages.push(echoMessage);
+        if (this.activeUser.enableEncryption) {
+            setTimeout(function () { echoMessage = _this.messageService.encryptMessage(echoMessage); }, this.encryptionTimeInterval * 1000);
+        }
     };
     Conversation.prototype.decryptMessag = function (message) {
         message.decryptMessage();
@@ -97,7 +94,7 @@ var Conversation = (function () {
             selector: 'conversation',
             templateUrl: 'app/components/conversation/conversation.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [message_service_1.MessageService])
     ], Conversation);
     return Conversation;
 }());

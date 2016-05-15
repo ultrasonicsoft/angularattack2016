@@ -1,5 +1,3 @@
-<!-- Dropdown Trigger -->
-<!-- Dropdown Structure -->
 <ul id='dropdown1' class='dropdown-content'>
     <li><a (click)="toggleEncryption()">{{activeUser.enableEncryption? 'Disable Encryption':'Enable Encryption'}}</a></li>
     <li class="divider"></li>
@@ -57,14 +55,5 @@
                 <a (click)="showTweetMessageModal(message)"><i class="material-icons">repeat</i></a>
             </div>
         </div>
-        <!--<div>
-            <div [attr.id]="'message' + (i+1)" *ngIf="!message.isOwn" class="bubble me recevied-message" (click)="decryptMessag(message)">
-                <strong class="waves-effect waves-teal"> {{message.text}} </strong>
-                <span style="font-size:10">{{message.messageReceived | date:'shortTime'}}</span>
-            </div>
-            <div class="right">
-                <a (click)="showTweetMessageModal(message)"><i class="material-icons">repeat</i></a>
-            </div>
-        </div>-->
     </li>
 </ul>

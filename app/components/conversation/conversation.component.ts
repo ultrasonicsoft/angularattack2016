@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Message } from '../../models/message.model';
 import { User } from '../../models/user.model';
+import { MessageService } from '../../services/message.service';
 
 declare var jQuery: any;
 
@@ -15,7 +16,7 @@ export class Conversation {
     encryptionTimeInterval = 5;
     messageToTweet: string;
 
-    constructor() {
+    constructor(private messageService: MessageService) {
     }
 
     ngOnInit() {
@@ -36,19 +37,6 @@ export class Conversation {
         jQuery(document).ready(function () {
             jQuery('.modal-trigger').leanModal();
         });
-
-        var list = ['first blurb', 'second blurb', 'third blurb'];  // list of blurbs
-        var txt = jQuery('#message1');
-        var options = {
-            duration: 1000,          // Time (ms) each blurb will remain on screen
-            rearrangeDuration: 1000, // Time (ms) a character takes to reach its position
-            effect: 'random',        // Animation effect the characters use to appear
-            centered: true           // Centers the text relative to its container
-        }
-
-        // if(txt)
-        // txt.textualizer(list, options); // textualize it!
-        // txt.textualizer('start'); // start
     }
 
     toggleEncryption() {
@@ -65,11 +53,23 @@ export class Conversation {
         if (!this.activeUser.messages) {
             this.activeUser.messages = new Array<Message>();
         }
-        let newMessage = new Message(this.activeUser.messages.length + 1, false, newMessageText, sender, true, this.activeUser.enableEncryption, this.encryptionTimeInterval);
+        let newMessage = this.messageService.createNewMessage(this.activeUser.messages.length + 1, false,
+            newMessageText, sender, true, this.activeUser.enableEncryption, this.encryptionTimeInterval);
         this.activeUser.messages.push(newMessage);
 
-        let echoMessage = new Message(this.activeUser.messages.length + 1, false, newMessageText, sender, false, this.activeUser.enableEncryption, this.encryptionTimeInterval);
+        if (this.activeUser.enableEncryption) {
+            setTimeout(() => { newMessage = this.messageService.encryptMessage(newMessage); }, this.encryptionTimeInterval * 1000);
+            // setTimeout(() => { this.encryptMessage(); }, this.encryptionInterval * 1000);
+        }
+
+        let echoMessage = this.messageService.createNewMessage(this.activeUser.messages.length + 1, false,
+            newMessageText, sender, false, this.activeUser.enableEncryption, this.encryptionTimeInterval);
         this.activeUser.messages.push(echoMessage);
+
+        if (this.activeUser.enableEncryption) {
+            setTimeout(() => { echoMessage = this.messageService.encryptMessage(echoMessage); }, this.encryptionTimeInterval * 1000);
+            // setTimeout(() => { this.encryptMessage(); }, this.encryptionInterval * 1000);
+        }
     }
 
     decryptMessag(message: Message) {
