@@ -25,11 +25,15 @@
                 <h5 class="title white-text profile-info">Balram</h5>
             </a>
         </li>
-
-        <li *ngFor="let user of allUsers;" class="collection-item avatar">
-            <img [src]="user.avatarUrl" alt="user.name" class="circle">
-            <span class="title"><a class="title waves-effect waves-teal" (click)="setActiveUser(user)"> {{user.name}}</a></span>
-        </li>
+        <li class="search">
+            <div class="search-wrapper card">
+                <input id="search" style="width:80%" [(ngModel)]="searchUser"><i class="material-icons">search</i>
+                <div class="search-results"></div>
+            </div>
+            <li *ngFor="let user of allUsers | searchUserFilter:searchUser;" class="collection-item avatar">
+                <img [src]="user.avatarUrl" alt="user.name" class="circle">
+                <span class="title"><a class="title waves-effect waves-teal" (click)="setActiveUser(user)"> {{user.name}}</a></span>
+            </li>
     </ul>
 </header>
 <main>
@@ -40,7 +44,8 @@
 
         <div class="row">
             <div class="card-panel message-bar">
-                <input placeholder="Enter your chat message" (keyup.enter)="sendMessage()" [(ngModel)]="messageText" type="text" class="validate message-input"/>
+                <input placeholder="Enter your chat message" (keyup.enter)="sendMessage()" [(ngModel)]="messageText" type="text" class="validate message-input"
+                />
                 <a (click)="sendMessage()"><i class="material-icons message-send-button">send</i></a>
             </div>
         </div>

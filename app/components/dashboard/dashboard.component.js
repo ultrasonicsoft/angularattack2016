@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var IUserService_service_1 = require('../../services/IUserService.service');
 var conversation_component_1 = require('../conversation/conversation.component');
+var searchUser_pipe_1 = require('../../pipes/searchUser.pipe');
 var AppComponent = (function () {
     function AppComponent(userService) {
         this.userService = userService;
@@ -36,7 +37,8 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'my-app',
             templateUrl: 'app/components/dashboard/dashboard.html',
-            directives: [conversation_component_1.Conversation]
+            directives: [conversation_component_1.Conversation],
+            pipes: [searchUser_pipe_1.SearchUserPipe]
         }), 
         __metadata('design:paramtypes', [IUserService_service_1.IUserService])
     ], AppComponent);

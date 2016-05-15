@@ -2,11 +2,12 @@ import {Component, ViewChild} from '@angular/core';
 import { IUserService } from '../../services/IUserService.service';
 import { User } from '../../models/user.model';
 import { Conversation } from '../conversation/conversation.component';
-
+import { SearchUserPipe } from '../../pipes/searchUser.pipe';
 @Component({
     selector: 'my-app',
     templateUrl : 'app/components/dashboard/dashboard.html',
-    directives: [Conversation]
+    directives: [Conversation],
+    pipes:[SearchUserPipe]
 })
 export class AppComponent {
     
@@ -15,6 +16,7 @@ export class AppComponent {
     @ViewChild(Conversation) conversation:Conversation;
     
     private activeUser:User;
+    searchUser:string;
     
     constructor(private userService: IUserService){
     }
