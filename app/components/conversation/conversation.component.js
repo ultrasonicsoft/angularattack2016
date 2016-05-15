@@ -33,6 +33,17 @@ var Conversation = (function () {
         jQuery(document).ready(function () {
             jQuery('.modal-trigger').leanModal();
         });
+        var list = ['first blurb', 'second blurb', 'third blurb']; // list of blurbs
+        var txt = jQuery('#message1');
+        var options = {
+            duration: 1000,
+            rearrangeDuration: 1000,
+            effect: 'random',
+            centered: true // Centers the text relative to its container
+        };
+        // if(txt)
+        // txt.textualizer(list, options); // textualize it!
+        // txt.textualizer('start'); // start
     };
     Conversation.prototype.toggleEncryption = function () {
         this.activeUser.enableEncryption = !this.activeUser.enableEncryption;

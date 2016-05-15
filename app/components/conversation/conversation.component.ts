@@ -36,6 +36,18 @@ export class Conversation {
             jQuery('.modal-trigger').leanModal();
         });
 
+        var list = ['first blurb', 'second blurb', 'third blurb'];  // list of blurbs
+        var txt = jQuery('#message1');
+        var options = {
+            duration: 1000,          // Time (ms) each blurb will remain on screen
+            rearrangeDuration: 1000, // Time (ms) a character takes to reach its position
+            effect: 'random',        // Animation effect the characters use to appear
+            centered: true           // Centers the text relative to its container
+        }
+        
+        // if(txt)
+        // txt.textualizer(list, options); // textualize it!
+        // txt.textualizer('start'); // start
     }
 
     toggleEncryption() {

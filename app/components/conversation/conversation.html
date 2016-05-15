@@ -14,19 +14,20 @@
         <p>Current (in seconds): <strong>{{encryptionTimeInterval}}</strong></p>
         <p>Set new(in seconds):</p>
         <p class="range-field">
-            <input type="range" id="test5" min="0" max="100" [attr.value]="encryptionTimeInterval" #interval (change)="encryptionIntervalChanged(interval)" />
+            <input type="range" id="test5" min="0" max="100" [attr.value]="encryptionTimeInterval" #interval (change)="encryptionIntervalChanged(interval)"
+            />
         </p>
     </div>
 </div>
 
-
 <ul>
-    <li *ngFor="let message of activeUser.messages;" class="bold">
-        <div *ngIf="message.isOwn" class="card-panel hoverable teal white-text own-message" (click)="decryptMessag(message)">
+    <li *ngFor="let message of activeUser.messages; let i = index" class="bold">
+        <div [attr.id]="'message' + (i+1)" *ngIf="message.isOwn" class="card-panel hoverable teal white-text own-message" (click)="decryptMessag(message)">
             <strong class="waves-effect waves-teal"> {{message.text}} </strong>
             <span style="font-size:10">{{message.messageReceived | date:'shortTime'}}</span>
         </div>
-        <div *ngIf="!message.isOwn" class="card-panel hoverable teal white-text" style="min-width: 20%; max-width: 30%;" (click)="decryptMessag(message)">
+        <div [attr.id]="'message' + (i+1)" *ngIf="!message.isOwn" class="card-panel hoverable teal white-text" style="min-width: 20%; max-width: 30%;"
+            (click)="decryptMessag(message)">
             <strong class="waves-effect waves-teal"> {{message.text}} </strong>
             <span style="font-size:10">{{message.messageReceived | date:'shortTime'}}</span>
         </div>

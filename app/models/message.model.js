@@ -3,7 +3,7 @@ var Message = (function () {
     function Message(id, isRead, text, sender, isOwn, enableEncryption, encryptionInterval) {
         var _this = this;
         this.enableEncryption = true;
-        this.encryptionInterval = 5;
+        this.encryptionInterval = 3;
         this.id = id;
         this.isRead = isRead;
         this.text = text;
@@ -12,6 +12,7 @@ var Message = (function () {
         this.isOwn = isOwn;
         this.enableEncryption = enableEncryption;
         this.encryptionInterval = encryptionInterval;
+        this.originalMessageText = text;
         if (this.enableEncryption) {
             setTimeout(function () { _this.encryptMessage(); }, this.encryptionInterval * 1000);
         }
@@ -21,6 +22,15 @@ var Message = (function () {
         this.encryptedData = sjcl.encrypt("password", this.text);
         var encryptedJson = JSON.parse(this.encryptedData);
         this.text = encryptedJson.iv;
+        var messageText = this.text + " " + this.messageReceived.toLocaleTimeString();
+        this.showAnimation(messageText, this.id);
+    };
+    Message.prototype.showAnimation = function (text, id) {
+        var messageElementName = "#message" + (id);
+        console.log('current message elemnt: ' + messageElementName);
+        jQuery(messageElementName).goBinary({
+            text: text
+        });
     };
     Message.prototype.decryptMessage = function () {
         var _this = this;
@@ -29,6 +39,8 @@ var Message = (function () {
         if (this.enableEncryption) {
             setTimeout(function () { _this.encryptMessage(); }, this.encryptionInterval * 1000);
         }
+        var messageText = this.text + " " + this.messageReceived.toLocaleTimeString();
+        this.showAnimation(messageText, this.id);
     };
     Message.prototype.stopEncryption = function () {
         this.enableEncryption = false;
