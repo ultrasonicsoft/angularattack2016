@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var user_service_1 = require('../../services/user.service');
+var IUserService_service_1 = require('../../services/IUserService.service');
 var conversation_component_1 = require('../conversation/conversation.component');
 var AppComponent = (function () {
     function AppComponent(userService) {
@@ -38,7 +38,7 @@ var AppComponent = (function () {
             templateUrl: 'app/components/dashboard/dashboard.html',
             directives: [conversation_component_1.Conversation]
         }), 
-        __metadata('design:paramtypes', [user_service_1.UserService])
+        __metadata('design:paramtypes', [IUserService_service_1.IUserService])
     ], AppComponent);
     return AppComponent;
 }());

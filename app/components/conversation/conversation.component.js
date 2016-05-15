@@ -9,12 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var user_service_1 = require('../../services/user.service');
 var message_model_1 = require('../../models/message.model');
 var user_model_1 = require('../../models/user.model');
 var Conversation = (function () {
-    function Conversation(userService) {
-        this.userService = userService;
+    function Conversation() {
         this.encryptionTimeInterval = 5;
     }
     Conversation.prototype.ngOnInit = function () {
@@ -85,7 +83,7 @@ var Conversation = (function () {
             selector: 'conversation',
             templateUrl: 'app/components/conversation/conversation.html'
         }), 
-        __metadata('design:paramtypes', [user_service_1.UserService])
+        __metadata('design:paramtypes', [])
     ], Conversation);
     return Conversation;
 }());
