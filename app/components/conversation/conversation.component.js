@@ -52,7 +52,8 @@ var Conversation = (function () {
         if (this.activeUser.enableEncryption) {
             setTimeout(function () {
                 newMessage = _this.messageService.encryptMessage(newMessage);
-                _this.showMessageAnimation(newMessage.text, newMessage.id);
+                var messageText = newMessage.text + " " + newMessage.messageReceived.toLocaleTimeString();
+                _this.showMessageAnimation(messageText, newMessage.id);
             }, this.encryptionTimeInterval * 1000);
         }
         var echoMessage = this.messageService.createNewMessage(this.activeUser.messages.length + 1, false, newMessageText, sender, false, this.activeUser.enableEncryption, this.encryptionTimeInterval);
@@ -60,7 +61,8 @@ var Conversation = (function () {
         if (this.activeUser.enableEncryption) {
             setTimeout(function () {
                 echoMessage = _this.messageService.encryptMessage(echoMessage);
-                _this.showMessageAnimation(echoMessage.text, echoMessage.id);
+                var messageText = echoMessage.text + " " + echoMessage.messageReceived.toLocaleTimeString();
+                _this.showMessageAnimation(messageText, echoMessage.id);
             }, this.encryptionTimeInterval * 1000);
         }
     };
@@ -72,7 +74,18 @@ var Conversation = (function () {
         });
     };
     Conversation.prototype.decryptMessag = function (message) {
-        message.decryptMessage();
+        var _this = this;
+        // message.decryptMessage();
+        message = this.messageService.decryptMessage(message);
+        var messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
+        this.showMessageAnimation(messageText, message.id);
+        if (message.enableEncryption) {
+            setTimeout(function () {
+                message = _this.messageService.encryptMessage(message);
+                var messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
+                _this.showMessageAnimation(messageText, message.id);
+            }, this.encryptionTimeInterval * 1000);
+        }
     };
     Conversation.prototype.deleteConversation = function () {
         this.activeUser.deleteConversation();

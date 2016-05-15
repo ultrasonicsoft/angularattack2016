@@ -43,7 +43,7 @@
         </div>
 
         <div class="row">
-            <div class="card-panel message-bar" style="z-index:1000;">
+            <div class="card-panel message-bar">
                 <input placeholder="Enter your chat message" (keyup.enter)="sendMessage()" [(ngModel)]="messageText" type="text" class="validate message-input"
                 />
                 <a (click)="sendMessage()"><i class="material-icons message-send-button">send</i></a>

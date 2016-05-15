@@ -36,6 +36,15 @@ var MessageService = (function () {
         var messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
         return message;
     };
+    MessageService.prototype.decryptMessage = function (encryptMessage) {
+        encryptMessage.text = sjcl.decrypt("password", encryptMessage.encryptedData);
+        // if (encryptMessage.enableEncryption) {
+        //     setTimeout(() => { encryptMessage.encryptMessage(); }, encryptMessage.encryptionInterval * 1000);
+        // }
+        // let messageText = this.text + " " + this.messageReceived.toLocaleTimeString();
+        // this.showAnimation(messageText, this.id);
+        return encryptMessage;
+    };
     MessageService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])

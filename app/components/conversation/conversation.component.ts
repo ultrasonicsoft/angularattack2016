@@ -60,7 +60,8 @@ export class Conversation {
         if (this.activeUser.enableEncryption) {
             setTimeout(() => {
                 newMessage = this.messageService.encryptMessage(newMessage);
-                this.showMessageAnimation(newMessage.text, newMessage.id);
+                let messageText = newMessage.text + " " + newMessage.messageReceived.toLocaleTimeString();
+                this.showMessageAnimation(messageText, newMessage.id);
             }, this.encryptionTimeInterval * 1000);
             // setTimeout(() => { this.encryptMessage(); }, this.encryptionInterval * 1000);
         }
@@ -72,7 +73,8 @@ export class Conversation {
         if (this.activeUser.enableEncryption) {
             setTimeout(() => {
                 echoMessage = this.messageService.encryptMessage(echoMessage);
-                this.showMessageAnimation(echoMessage.text,echoMessage.id);
+                let messageText = echoMessage.text + " " + echoMessage.messageReceived.toLocaleTimeString();
+                this.showMessageAnimation(messageText, echoMessage.id);
             }, this.encryptionTimeInterval * 1000);
             // setTimeout(() => { this.encryptMessage(); }, this.encryptionInterval * 1000);
         }
@@ -89,7 +91,18 @@ export class Conversation {
     }
 
     decryptMessag(message: Message) {
-        message.decryptMessage();
+        // message.decryptMessage();
+        message = this.messageService.decryptMessage(message);
+        let messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
+        this.showMessageAnimation(messageText, message.id);
+
+        if (message.enableEncryption) {
+            setTimeout(() => {
+                message = this.messageService.encryptMessage(message);
+                let messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
+                this.showMessageAnimation(messageText, message.id);
+            }, this.encryptionTimeInterval * 1000);
+        }
     }
 
     deleteConversation() {

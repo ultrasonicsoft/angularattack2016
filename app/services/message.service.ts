@@ -7,7 +7,7 @@ declare var sjcl: any;
 @Injectable()
 export class MessageService {
     createNewMessage(id: number, isRead: boolean, text: string, sender: User,
-        isOwn: boolean, enableEncryption: boolean, encryptionInterval: number) : Message{
+        isOwn: boolean, enableEncryption: boolean, encryptionInterval: number): Message {
         let newMessage = new Message();
         newMessage.id = id;
         newMessage.isRead = isRead;
@@ -25,8 +25,8 @@ export class MessageService {
         // }
     }
 
-    encryptMessage(message:Message):Message {
-        
+    encryptMessage(message: Message): Message {
+
         message.encryptedData = sjcl.encrypt("password", message.text);
         var encryptedJson = JSON.parse(message.encryptedData);
         message.text = encryptedJson.iv;
@@ -35,20 +35,17 @@ export class MessageService {
         return message;
     }
 
-  
+    decryptMessage(encryptMessage: Message): Message {
+        encryptMessage.text = sjcl.decrypt("password", encryptMessage.encryptedData);
 
-    // decryptMessage() {
-    //     console.log('decrypt called for message: ', this.text);
-    //     this.text = sjcl.decrypt("password", this.encryptedData);
+        // if (encryptMessage.enableEncryption) {
+        //     setTimeout(() => { encryptMessage.encryptMessage(); }, encryptMessage.encryptionInterval * 1000);
+        // }
 
-    //     if (this.enableEncryption) {
-    //         setTimeout(() => { this.encryptMessage(); }, this.encryptionInterval * 1000);
-    //     }
-
-    //     let messageText = this.text + " " + this.messageReceived.toLocaleTimeString();
-    //     this.showAnimation(messageText, this.id);
-
-    // }
+        // let messageText = this.text + " " + this.messageReceived.toLocaleTimeString();
+        // this.showAnimation(messageText, this.id);
+        return encryptMessage;
+    }
 
     // decrypt(encryptedData:any):string{
     //     return sjcl.decrypt("password", encryptedData);
