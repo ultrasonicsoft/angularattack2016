@@ -27,7 +27,7 @@ var Conversation = (function () {
             hover: true,
             gutter: 0,
             belowOrigin: false,
-            alignment: 'left' // Displays dropdown with edge aligned to the left of button
+            alignment: 'left'
         });
         jQuery(document).ready(function () {
             jQuery('.modal-trigger').leanModal();
@@ -37,7 +37,6 @@ var Conversation = (function () {
         var _this = this;
         this.activeUser.enableEncryption = !this.activeUser.enableEncryption;
         if (this.activeUser.enableEncryption) {
-            // this.activeUser.encryptAllMessage();
             this.activeUser.messages = this.messageService.encryptAllMessage(this.activeUser.messages);
             this.activeUser.messages.forEach(function (message) {
                 var messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
@@ -85,7 +84,6 @@ var Conversation = (function () {
     };
     Conversation.prototype.decryptMessag = function (message) {
         var _this = this;
-        // message.decryptMessage();
         message = this.messageService.decryptMessage(message);
         var messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
         this.showMessageAnimation(messageText, message.id);

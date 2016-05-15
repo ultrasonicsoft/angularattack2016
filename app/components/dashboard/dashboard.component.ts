@@ -12,14 +12,14 @@ declare var jQuery: any;
     directives: [Conversation],
     pipes: [SearchUserPipe]
 })
-export class AppComponent {
+export class DashboardComponent {
 
     private allUsers: Array<User>;
     private messageText: string;
-    @ViewChild(Conversation) conversation: Conversation;
-
     private activeUser: User;
     searchUser: string;
+    
+    @ViewChild(Conversation) conversation: Conversation;
 
     constructor(private userService: IUserService) {
     }
@@ -34,11 +34,11 @@ export class AppComponent {
         jQuery('.dropdown-button').dropdown({
             inDuration: 300,
             outDuration: 225,
-            constrain_width: false, // Does not change width of dropdown to that of the activator
-            hover: true, // Activate on hover
-            gutter: 0, // Spacing from edge
-            belowOrigin: false, // Displays dropdown below the button
-            alignment: 'left' // Displays dropdown with edge aligned to the left of button
+            constrain_width: false, 
+            hover: true, 
+            gutter: 0, 
+            belowOrigin: false, 
+            alignment: 'left' 
         });
 
         jQuery(document).ready(function () {
@@ -56,6 +56,5 @@ export class AppComponent {
         console.log(this.activeUser.name);
         this.conversation.newMessageAlert(this.messageText, this.activeUser);
         this.messageText = '';
-
     }
 }

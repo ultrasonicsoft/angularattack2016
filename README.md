@@ -30,6 +30,11 @@ Encryption setting can be configured per conversation. So you can have some conv
 I have used Stanford Javascript Crypto Library for encryption and decryption.
 http://bitwiseshiftleft.github.io/sjcl/
 
+## Class Diagram
+
+![classdiagram1](https://cloud.githubusercontent.com/assets/4145169/15276365/bb9e3056-1b03-11e6-8567-cd05f3f3a8a2.jpg)
+
+
 ## Configure Project
 
 Clone this repo into new project folder (e.g., `my-proj`).

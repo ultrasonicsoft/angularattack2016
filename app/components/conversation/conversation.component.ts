@@ -27,11 +27,11 @@ export class Conversation {
         jQuery('.dropdown-button').dropdown({
             inDuration: 300,
             outDuration: 225,
-            constrain_width: false, // Does not change width of dropdown to that of the activator
-            hover: true, // Activate on hover
-            gutter: 0, // Spacing from edge
-            belowOrigin: false, // Displays dropdown below the button
-            alignment: 'left' // Displays dropdown with edge aligned to the left of button
+            constrain_width: false,
+            hover: true,
+            gutter: 0,
+            belowOrigin: false,
+            alignment: 'left'
         });
 
         jQuery(document).ready(function () {
@@ -42,7 +42,6 @@ export class Conversation {
     toggleEncryption() {
         this.activeUser.enableEncryption = !this.activeUser.enableEncryption;
         if (this.activeUser.enableEncryption) {
-            // this.activeUser.encryptAllMessage();
             this.activeUser.messages = this.messageService.encryptAllMessage(this.activeUser.messages);
             this.activeUser.messages.forEach(message => {
                 let messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
@@ -55,7 +54,6 @@ export class Conversation {
                 let messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
                 this.showMessageAnimation(messageText, message.id);
             });
-            // this.activeUser.decryptAllMessage();
         }
     }
     newMessageAlert(newMessageText: string, sender: User) {
@@ -73,7 +71,6 @@ export class Conversation {
                 let messageText = newMessage.text + " " + newMessage.messageReceived.toLocaleTimeString();
                 this.showMessageAnimation(messageText, newMessage.id);
             }, this.encryptionTimeInterval * 1000);
-            // setTimeout(() => { this.encryptMessage(); }, this.encryptionInterval * 1000);
         }
 
         let echoMessage = this.messageService.createNewMessage(this.activeUser.messages.length + 1, false,
@@ -86,7 +83,6 @@ export class Conversation {
                 let messageText = echoMessage.text + " " + echoMessage.messageReceived.toLocaleTimeString();
                 this.showMessageAnimation(messageText, echoMessage.id);
             }, this.encryptionTimeInterval * 1000);
-            // setTimeout(() => { this.encryptMessage(); }, this.encryptionInterval * 1000);
         }
     }
 
@@ -101,7 +97,6 @@ export class Conversation {
     }
 
     decryptMessag(message: Message) {
-        // message.decryptMessage();
         message = this.messageService.decryptMessage(message);
         let messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
         this.showMessageAnimation(messageText, message.id);

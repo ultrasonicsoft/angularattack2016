@@ -12,16 +12,16 @@ var core_1 = require('@angular/core');
 var IUserService_service_1 = require('../../services/user/interface/IUserService.service');
 var conversation_component_1 = require('../conversation/conversation.component');
 var searchUser_pipe_1 = require('../../pipes/searchUser.pipe');
-var AppComponent = (function () {
-    function AppComponent(userService) {
+var DashboardComponent = (function () {
+    function DashboardComponent(userService) {
         this.userService = userService;
     }
-    AppComponent.prototype.ngOnInit = function () {
+    DashboardComponent.prototype.ngOnInit = function () {
         this.allUsers = this.userService.getAllUsers();
         this.activeUser = this.allUsers[0];
         console.log(this.allUsers);
     };
-    AppComponent.prototype.ngAfterViewInit = function () {
+    DashboardComponent.prototype.ngAfterViewInit = function () {
         jQuery('.dropdown-button').dropdown({
             inDuration: 300,
             outDuration: 225,
@@ -29,17 +29,17 @@ var AppComponent = (function () {
             hover: true,
             gutter: 0,
             belowOrigin: false,
-            alignment: 'left' // Displays dropdown with edge aligned to the left of button
+            alignment: 'left'
         });
         jQuery(document).ready(function () {
             jQuery('.modal-trigger').leanModal();
         });
         jQuery('#splashScreenModal').openModal();
     };
-    AppComponent.prototype.setActiveUser = function (sender) {
+    DashboardComponent.prototype.setActiveUser = function (sender) {
         this.activeUser = sender;
     };
-    AppComponent.prototype.sendMessage = function () {
+    DashboardComponent.prototype.sendMessage = function () {
         console.log(this.activeUser.name);
         this.conversation.newMessageAlert(this.messageText, this.activeUser);
         this.messageText = '';
@@ -47,8 +47,8 @@ var AppComponent = (function () {
     __decorate([
         core_1.ViewChild(conversation_component_1.Conversation), 
         __metadata('design:type', conversation_component_1.Conversation)
-    ], AppComponent.prototype, "conversation", void 0);
-    AppComponent = __decorate([
+    ], DashboardComponent.prototype, "conversation", void 0);
+    DashboardComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
             templateUrl: 'app/components/dashboard/dashboard.html',
@@ -56,8 +56,8 @@ var AppComponent = (function () {
             pipes: [searchUser_pipe_1.SearchUserPipe]
         }), 
         __metadata('design:paramtypes', [IUserService_service_1.IUserService])
-    ], AppComponent);
-    return AppComponent;
+    ], DashboardComponent);
+    return DashboardComponent;
 }());
-exports.AppComponent = AppComponent;
+exports.DashboardComponent = DashboardComponent;
 //# sourceMappingURL=dashboard.component.js.map
