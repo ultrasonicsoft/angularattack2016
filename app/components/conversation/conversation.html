@@ -38,11 +38,6 @@
 
 <ul>
     <li *ngFor="let message of activeUser.messages; let i = index" class="bold">
-        <!--<div [attr.id]="'message' + (i+1)" *ngIf="message.isOwn" class="bubble you own-message" (click)="decryptMessag(message)">
-            <strong class="waves-effect waves-teal"> {{message.text}} </strong>
-            <span style="font-size:10">{{message.messageReceived | date:'shortTime'}}</span>
-        </div>-->
-
         <div *ngIf="message.isOwn" class="bubble you own-message">
             <div [attr.id]="'message' + (i+1)" (click)="decryptMessag(message)">
                 <strong class="waves-effect waves-teal"> {{message.text}} </strong>
@@ -53,11 +48,23 @@
             </div>
         </div>
 
-        <div>
+        <div *ngIf="!message.isOwn" class="bubble me recevied-message" style="cursor:pointer;">
+            <div [attr.id]="'message' + (i+1)" (click)="decryptMessag(message)">
+                <strong class="waves-effect waves-teal"> {{message.text}} </strong>
+                <span style="font-size:10">{{message.messageReceived | date:'shortTime'}}</span>
+            </div>
+            <div class="right">
+                <a (click)="showTweetMessageModal(message)"><i class="material-icons">repeat</i></a>
+            </div>
+        </div>
+        <!--<div>
             <div [attr.id]="'message' + (i+1)" *ngIf="!message.isOwn" class="bubble me recevied-message" (click)="decryptMessag(message)">
                 <strong class="waves-effect waves-teal"> {{message.text}} </strong>
                 <span style="font-size:10">{{message.messageReceived | date:'shortTime'}}</span>
             </div>
-        </div>
+            <div class="right">
+                <a (click)="showTweetMessageModal(message)"><i class="material-icons">repeat</i></a>
+            </div>
+        </div>-->
     </li>
 </ul>
