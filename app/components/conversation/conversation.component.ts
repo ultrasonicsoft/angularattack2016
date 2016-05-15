@@ -58,7 +58,10 @@ export class Conversation {
         this.activeUser.messages.push(newMessage);
 
         if (this.activeUser.enableEncryption) {
-            setTimeout(() => { newMessage = this.messageService.encryptMessage(newMessage); }, this.encryptionTimeInterval * 1000);
+            setTimeout(() => {
+                newMessage = this.messageService.encryptMessage(newMessage);
+                this.showMessageAnimation(newMessage.text, newMessage.id);
+            }, this.encryptionTimeInterval * 1000);
             // setTimeout(() => { this.encryptMessage(); }, this.encryptionInterval * 1000);
         }
 
@@ -67,9 +70,22 @@ export class Conversation {
         this.activeUser.messages.push(echoMessage);
 
         if (this.activeUser.enableEncryption) {
-            setTimeout(() => { echoMessage = this.messageService.encryptMessage(echoMessage); }, this.encryptionTimeInterval * 1000);
+            setTimeout(() => {
+                echoMessage = this.messageService.encryptMessage(echoMessage);
+                this.showMessageAnimation(echoMessage.text,echoMessage.id);
+            }, this.encryptionTimeInterval * 1000);
             // setTimeout(() => { this.encryptMessage(); }, this.encryptionInterval * 1000);
         }
+    }
+
+    showMessageAnimation(messageText: string, messageId: number) {
+        var messageElementName = "#message" + (messageId);
+        console.log('current message elemnt: ' + messageElementName);
+
+        jQuery(messageElementName).goBinary({
+            text: messageText
+        });
+
     }
 
     decryptMessag(message: Message) {

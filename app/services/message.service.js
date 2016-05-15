@@ -35,7 +35,6 @@ var MessageService = (function () {
         message.text = encryptedJson.iv;
         var messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
         return message;
-        // plainMessage.showAnimation(messageText, plainMessage.id);
     };
     MessageService = __decorate([
         core_1.Injectable(), 

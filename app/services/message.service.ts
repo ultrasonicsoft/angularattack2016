@@ -33,18 +33,9 @@ export class MessageService {
 
         let messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
         return message;
-        // plainMessage.showAnimation(messageText, plainMessage.id);
     }
 
-    // showAnimation(text:string, id:number) {
-    //     var messageElementName = "#message"+(id);
-    //     console.log('current message elemnt: ' + messageElementName);
-
-    //     jQuery(messageElementName).goBinary({
-    //         text: text
-    //     });
-
-    // }
+  
 
     // decryptMessage() {
     //     console.log('decrypt called for message: ', this.text);

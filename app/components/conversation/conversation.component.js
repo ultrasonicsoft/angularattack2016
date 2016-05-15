@@ -50,13 +50,26 @@ var Conversation = (function () {
         var newMessage = this.messageService.createNewMessage(this.activeUser.messages.length + 1, false, newMessageText, sender, true, this.activeUser.enableEncryption, this.encryptionTimeInterval);
         this.activeUser.messages.push(newMessage);
         if (this.activeUser.enableEncryption) {
-            setTimeout(function () { newMessage = _this.messageService.encryptMessage(newMessage); }, this.encryptionTimeInterval * 1000);
+            setTimeout(function () {
+                newMessage = _this.messageService.encryptMessage(newMessage);
+                _this.showMessageAnimation(newMessage.text, newMessage.id);
+            }, this.encryptionTimeInterval * 1000);
         }
         var echoMessage = this.messageService.createNewMessage(this.activeUser.messages.length + 1, false, newMessageText, sender, false, this.activeUser.enableEncryption, this.encryptionTimeInterval);
         this.activeUser.messages.push(echoMessage);
         if (this.activeUser.enableEncryption) {
-            setTimeout(function () { echoMessage = _this.messageService.encryptMessage(echoMessage); }, this.encryptionTimeInterval * 1000);
+            setTimeout(function () {
+                echoMessage = _this.messageService.encryptMessage(echoMessage);
+                _this.showMessageAnimation(echoMessage.text, echoMessage.id);
+            }, this.encryptionTimeInterval * 1000);
         }
+    };
+    Conversation.prototype.showMessageAnimation = function (messageText, messageId) {
+        var messageElementName = "#message" + (messageId);
+        console.log('current message elemnt: ' + messageElementName);
+        jQuery(messageElementName).goBinary({
+            text: messageText
+        });
     };
     Conversation.prototype.decryptMessag = function (message) {
         message.decryptMessage();
