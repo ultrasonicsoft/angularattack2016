@@ -1,6 +1,7 @@
 import {bootstrap}    from '@angular/platform-browser-dynamic';
 import {AppComponent} from './components/dashboard/dashboard.component';
-import {enableProdMode}    from '@angular/core';
-import { UserService } from './services/user.service';
+import {enableProdMode, provide}    from '@angular/core';
+import { MockUserService } from './services/mockUser.service';
+import { IUserService } from './services/IUserService.service';
 enableProdMode()
-bootstrap(AppComponent, [UserService]);
+bootstrap(AppComponent, [provide(IUserService, { useClass: MockUserService })]);

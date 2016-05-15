@@ -14,7 +14,7 @@ export class Conversation {
     @Input('active-user') activeUser: User;
     encryptionTimeInterval = 5;
 
-    constructor(private userService: UserService) {
+    constructor() {
     }
 
     ngOnInit() {

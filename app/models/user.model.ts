@@ -5,6 +5,7 @@ export class User {
     name: string;
     messages: Array<Message>;
     enableEncryption = true;
+    avatarUrl:string;
 
     decryptAllMessage() {
         this.messages.forEach(message => {

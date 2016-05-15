@@ -1,9 +1,9 @@
 import {Injectable, bind} from '@angular/core';
-import {User} from '../models/user.model.ts';
-
+import {User} from '../models/user.model';
+import { IUserService } from './IUserService.service';
 
 @Injectable()
-export class UserService {
+export class UserService implements IUserService {
 
     private allUsers : Array<User>;
     

@@ -12,6 +12,18 @@ var core_1 = require('@angular/core');
 var user_model_ts_1 = require('../models/user.model.ts');
 var UserService = (function () {
     function UserService() {
+    }
+    UserService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], UserService);
+    return UserService;
+}());
+exports.UserService = UserService;
+{
+    allUsers: Array();
+    constructor();
+    {
         this.allUsers = new Array();
         var user = new user_model_ts_1.User();
         for (var index = 0; index < 10; index++) {
@@ -21,14 +33,9 @@ var UserService = (function () {
             this.allUsers.push(user);
         }
     }
-    UserService.prototype.getAllUsers = function () {
-        return this.allUsers;
+    getAllUsers();
+    Array < user_model_ts_1.User > {
+        return: this.allUsers
     };
-    UserService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], UserService);
-    return UserService;
-}());
-exports.UserService = UserService;
+}
 //# sourceMappingURL=user.service.js.map

@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { IUserService } from '../../services/IUserService.service';
 import { User } from '../../models/user.model';
 import { Conversation } from '../conversation/conversation.component';
 
@@ -16,7 +16,7 @@ export class AppComponent {
     
     private activeUser:User;
     
-    constructor(private userService: UserService){
+    constructor(private userService: IUserService){
     }
     
     ngOnInit(){
