@@ -23,6 +23,10 @@ You can search your contact as you type their nam
 ## Enable/Disable Chat Encryption
 Encryption setting can be configured per conversation. So you can have some conversation encrypted and some plain text as per your comfort level.
 
+I have used Stanford Javascript Crypto Library for encryption and decryption.
+
+http://bitwiseshiftleft.github.io/sjcl/
+
 ## Configure Project
 
 Clone this repo into new project folder (e.g., `my-proj`).
