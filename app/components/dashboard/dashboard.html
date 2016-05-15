@@ -58,7 +58,7 @@
         </li>
         <li class="search">
             <div class="search-wrapper card">
-                <input id="search" style="width:80%" [(ngModel)]="searchUser"><i class="material-icons">search</i>
+                <input id="search" style="width:80%" [(ngModel)]="searchUser" placeholder="Search Contact"><i class="material-icons">search</i>
                 <div class="search-results"></div>
             </div>
             <li *ngFor="let user of allUsers | searchUserFilter:searchUser;" class="collection-item avatar">
