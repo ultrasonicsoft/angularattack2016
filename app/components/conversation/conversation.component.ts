@@ -42,10 +42,20 @@ export class Conversation {
     toggleEncryption() {
         this.activeUser.enableEncryption = !this.activeUser.enableEncryption;
         if (this.activeUser.enableEncryption) {
-            this.activeUser.encryptAllMessage();
+            // this.activeUser.encryptAllMessage();
+            this.activeUser.messages = this.messageService.encryptAllMessage(this.activeUser.messages);
+            this.activeUser.messages.forEach(message => {
+                let messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
+                this.showMessageAnimation(messageText, message.id);
+            });
         }
         else {
-            this.activeUser.decryptAllMessage();
+            this.activeUser.messages = this.messageService.decryptAllMessage(this.activeUser.messages);
+            this.activeUser.messages.forEach(message => {
+                let messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
+                this.showMessageAnimation(messageText, message.id);
+            });
+            // this.activeUser.decryptAllMessage();
         }
     }
     newMessageAlert(newMessageText: string, sender: User) {
@@ -106,7 +116,8 @@ export class Conversation {
     }
 
     deleteConversation() {
-        this.activeUser.deleteConversation();
+        this.activeUser.messages = new Array<Message>();
+        this.activeUser.enableEncryption = true;
     }
 
     openSettings() {

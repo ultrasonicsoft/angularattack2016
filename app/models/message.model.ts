@@ -17,44 +17,6 @@ export class Message {
     enableEncryption = true;
     encryptionInterval = 3;
 
-    encryptMessage() {
-        console.log('encrypt called for: ' + this.text);
-
-        this.encryptedData = sjcl.encrypt("password", this.text);
-        var encryptedJson = JSON.parse(this.encryptedData);
-        this.text = encryptedJson.iv;
-
-        let messageText = this.text + " " + this.messageReceived.toLocaleTimeString();
-        this.showAnimation(messageText, this.id);
-    }
-
-    showAnimation(text:string, id:number) {
-        var messageElementName = "#message"+(id);
-        console.log('current message elemnt: ' + messageElementName);
-        
-        jQuery(messageElementName).goBinary({
-            text: text
-        });
-
-    }
-
-    decryptMessage() {
-        console.log('decrypt called for message: ', this.text);
-        this.text = sjcl.decrypt("password", this.encryptedData);
-
-        if (this.enableEncryption) {
-            setTimeout(() => { this.encryptMessage(); }, this.encryptionInterval * 1000);
-        }
-        
-        let messageText = this.text + " " + this.messageReceived.toLocaleTimeString();
-        this.showAnimation(messageText, this.id);
-       
-    }
-    
-    decrypt(encryptedData:any):string{
-        return sjcl.decrypt("password", encryptedData);
-    }
-
     stopEncryption() {
         this.enableEncryption = false;
     }

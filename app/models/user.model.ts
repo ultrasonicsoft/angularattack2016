@@ -6,23 +6,4 @@ export class User {
     messages: Array<Message>;
     enableEncryption = true;
     avatarUrl:string;
-
-    decryptAllMessage() {
-        this.messages.forEach(message => {
-            message.stopEncryption();
-            message.decryptMessage();
-        });
-    }
-
-    encryptAllMessage() {
-        this.messages.forEach(message => {
-            message.startEncryption();
-            message.encryptMessage();
-        })
-    }
-    
-    deleteConversation(){
-        this.messages = new Array<Message>();
-        this.enableEncryption = true;
-    }
 }

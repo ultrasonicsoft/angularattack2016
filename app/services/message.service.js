@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var message_model_1 = require('../models/message.model');
 var MessageService = (function () {
     function MessageService() {
+        this.encryptionKey = "AngularAttack";
     }
     MessageService.prototype.createNewMessage = function (id, isRead, text, sender, isOwn, enableEncryption, encryptionInterval) {
         var newMessage = new message_model_1.Message();
@@ -25,25 +26,33 @@ var MessageService = (function () {
         newMessage.encryptionInterval = encryptionInterval;
         newMessage.originalMessageText = text;
         return newMessage;
-        // if (this.enableEncryption) {
-        //     setTimeout(() => { this.encryptMessage(); }, this.encryptionInterval * 1000);
-        // }
     };
     MessageService.prototype.encryptMessage = function (message) {
-        message.encryptedData = sjcl.encrypt("password", message.text);
+        message.encryptedData = sjcl.encrypt(this.encryptionKey, message.text);
         var encryptedJson = JSON.parse(message.encryptedData);
         message.text = encryptedJson.iv;
         var messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
         return message;
     };
     MessageService.prototype.decryptMessage = function (encryptMessage) {
-        encryptMessage.text = sjcl.decrypt("password", encryptMessage.encryptedData);
-        // if (encryptMessage.enableEncryption) {
-        //     setTimeout(() => { encryptMessage.encryptMessage(); }, encryptMessage.encryptionInterval * 1000);
-        // }
-        // let messageText = this.text + " " + this.messageReceived.toLocaleTimeString();
-        // this.showAnimation(messageText, this.id);
+        encryptMessage.text = sjcl.decrypt(this.encryptionKey, encryptMessage.encryptedData);
         return encryptMessage;
+    };
+    MessageService.prototype.decryptAllMessage = function (allMessage) {
+        var _this = this;
+        allMessage.forEach(function (message) {
+            message.stopEncryption();
+            message = _this.decryptMessage(message);
+        });
+        return allMessage;
+    };
+    MessageService.prototype.encryptAllMessage = function (allMessage) {
+        var _this = this;
+        allMessage.forEach(function (message) {
+            message.startEncryption();
+            message = _this.encryptMessage(message);
+        });
+        return allMessage;
     };
     MessageService = __decorate([
         core_1.Injectable(), 

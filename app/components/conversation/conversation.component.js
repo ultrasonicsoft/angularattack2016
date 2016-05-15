@@ -34,12 +34,22 @@ var Conversation = (function () {
         });
     };
     Conversation.prototype.toggleEncryption = function () {
+        var _this = this;
         this.activeUser.enableEncryption = !this.activeUser.enableEncryption;
         if (this.activeUser.enableEncryption) {
-            this.activeUser.encryptAllMessage();
+            // this.activeUser.encryptAllMessage();
+            this.activeUser.messages = this.messageService.encryptAllMessage(this.activeUser.messages);
+            this.activeUser.messages.forEach(function (message) {
+                var messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
+                _this.showMessageAnimation(messageText, message.id);
+            });
         }
         else {
-            this.activeUser.decryptAllMessage();
+            this.activeUser.messages = this.messageService.decryptAllMessage(this.activeUser.messages);
+            this.activeUser.messages.forEach(function (message) {
+                var messageText = message.text + " " + message.messageReceived.toLocaleTimeString();
+                _this.showMessageAnimation(messageText, message.id);
+            });
         }
     };
     Conversation.prototype.newMessageAlert = function (newMessageText, sender) {
@@ -88,7 +98,8 @@ var Conversation = (function () {
         }
     };
     Conversation.prototype.deleteConversation = function () {
-        this.activeUser.deleteConversation();
+        this.activeUser.messages = new Array();
+        this.activeUser.enableEncryption = true;
     };
     Conversation.prototype.openSettings = function () {
         jQuery('#modal1').openModal();
