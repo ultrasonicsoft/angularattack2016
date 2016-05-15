@@ -28,7 +28,7 @@ var MessageService = (function () {
         return newMessage;
     };
     MessageService.prototype.encryptMessage = function (message) {
-        message.encryptedData = sjcl.encrypt(this.encryptionKey, message.text);
+        message.encryptedData = sjcl.encrypt(this.encryptionKey, message.originalMessageText);
         var encryptedJson = JSON.parse(message.encryptedData);
         message.text = encryptedJson.iv;
         var messageText = message.text + " " + message.messageReceived.toLocaleTimeString();

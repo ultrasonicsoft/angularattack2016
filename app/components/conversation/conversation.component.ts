@@ -13,7 +13,6 @@ declare var jQuery: any;
 export class Conversation {
 
     @Input('active-user') activeUser: User;
-    encryptionTimeInterval = 5;
     messageToTweet: string;
 
     constructor(private messageService: MessageService) {

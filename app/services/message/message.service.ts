@@ -27,7 +27,7 @@ export class MessageService {
 
     encryptMessage(message: Message): Message {
 
-        message.encryptedData = sjcl.encrypt(this.encryptionKey, message.text);
+        message.encryptedData = sjcl.encrypt(this.encryptionKey, message.originalMessageText);
         var encryptedJson = JSON.parse(message.encryptedData);
         message.text = encryptedJson.iv;
 

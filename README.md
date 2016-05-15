@@ -16,7 +16,7 @@ When you are at private place or home, you can disable encryption feature and ch
 ![demo1](https://cloud.githubusercontent.com/assets/4145169/15276236/fc23da4e-1aff-11e6-93ce-3e97d951f926.gif)
 
 ## Configure encryption interval
-Default encryption interval is set to five seconds. You can configure this interval as per your choice through chat setting option.
+Default encryption interval is set to ten seconds. You can configure this interval as per your choice through chat setting option.
 
 ## Tweeter Integration
 You can tweet selected message on your tweeter wall from your chat window in one click.

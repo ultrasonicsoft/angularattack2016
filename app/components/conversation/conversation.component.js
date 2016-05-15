@@ -14,7 +14,7 @@ var message_service_1 = require('../../services/message/message.service');
 var Conversation = (function () {
     function Conversation(messageService) {
         this.messageService = messageService;
-        this.encryptionTimeInterval = 5;
+        this.encryptionTimeInterval = 10;
     }
     Conversation.prototype.ngOnInit = function () {
         this.activeUser.messages = new Array();
