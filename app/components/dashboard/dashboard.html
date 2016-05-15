@@ -4,8 +4,9 @@
 
             <div class="nav-wrapper">
                 <div class="row">
-                    <div class="col s1 m1">
-                        <a class="page-title">{{activeUser?.name}}</a>
+                    <div class="col s4 m3">
+                        <img [src]="activeUser.avatarUrl" width="42px" height="42px" style="vertical-align:sub" alt="activeUser.name" class="circle">
+                        <h4 class="page-title" style="display:inline-block; margin-left:5px">{{activeUser?.name}}</h4>
                     </div>
                     <div class="right">
                         <a class='dropdown-button white' href='#' data-activates='dropdown1'><i class="material-icons">more_vert</i></a>
